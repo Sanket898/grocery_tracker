@@ -19,8 +19,18 @@ const routes: Routes = [
         path: 'history',
         loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
       },
+      {
+        path: '',
+        redirectTo: 'lists',
+        pathMatch: 'full'
+      }
     ]
   },
+  {
+    path: '',
+    redirectTo: 'tabs',
+    pathMatch: 'full',
+  }
 ];
 
 @NgModule({

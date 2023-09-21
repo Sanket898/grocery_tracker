@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Tab2Page } from './tab2.page';
 
 import { Tab2PageRoutingModule } from './tab2-routing.module';
+import { SharedModule } from 'src/app/components/shared.module';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { Tab2PageRoutingModule } from './tab2-routing.module';
     FormsModule,
     ReactiveFormsModule,
     Tab2PageRoutingModule,
+    SharedModule
   ],
   declarations: [Tab2Page]
 })

@@ -7,6 +7,10 @@ const routes: Routes = [
     path: '',
     component: Tab2Page,
   },
+  {
+    path: 'create',
+    loadChildren: () => import('./create-list/create-list.module').then(m => m.CreateListPageModule)
+  },
 ];
 
 @NgModule({

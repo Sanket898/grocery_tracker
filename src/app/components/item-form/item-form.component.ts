@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { ModalController } from '@ionic/angular';
+import { Item } from 'src/app/types/Item';
 
 @Component({
   selector: 'app-item-form',
-  templateUrl:'./item-form.component.html',
+  templateUrl: './item-form.component.html',
   styleUrls: ['./item-form.component.scss'],
-  // providers: [DatePipe]
+  providers: [DatePipe]
 })
 export class ItemFormComponent {
-  constructor(private fb: FormBuilder, private datePipe: DatePipe, private modalController: ModalController) { }
+  constructor(private fb: FormBuilder, private datePipe: DatePipe) { }
 
   items: Item[] = [];
   lists: Array<any> = [];
@@ -36,7 +36,7 @@ export class ItemFormComponent {
     }
   }
 
-  public async saveItems() {
+  public saveItems() {
     this.lists.push(this.items)
   }
 
@@ -48,23 +48,7 @@ export class ItemFormComponent {
   }
 
   viewList(list: any) {
-    console.log(list)
-  }
-
-  async closeModal() {
-    const modal = await this.modalController.dismiss()
-    // return await modal.present();
   }
 
 }
 
-export interface Item {
-  name: string,
-  brand: string,
-  quantity: number,
-  type: string,
-  price: string,
-  total: number,
-  note: string,
-  date: Date
-}
