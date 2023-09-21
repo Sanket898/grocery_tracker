@@ -1,0 +1,7 @@
+{
+  "name": "grocery-tracker",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
