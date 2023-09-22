@@ -1,22 +1,16 @@
-<ion-card>
+<ion-card class="ion-no-margin">
   <ion-card-header>
     <ion-card-title>List 1</ion-card-title>
     <ion-card-subtitle>August 23</ion-card-subtitle>
     <ion-icon name="create-outline" size="large" slot="end"></ion-icon>
   </ion-card-header>
   <ion-card-content>
-    <ion-list *ngFor="let list of lists">
-      <ion-item *ngFor="let item of items">
-        <ion-thumbnail slot="start">
-          <img
-            alt="Silhouette of mountains"
-            src="https://ionicframework.com/docs/img/demos/thumbnail.svg"
-          />
-        </ion-thumbnail>
-        <ion-label>{{ item?.name }}</ion-label>
-        <ion-label>{{ item?.quantity }}</ion-label>
-        <ion-label>{{ item?.type }}</ion-label>
-        <ion-label>{{ item?.total }}</ion-label>
+    <ion-list>
+      <ion-item *ngFor="let item of itemsList">
+      <ion-list-header> Category 1 </ion-list-header>
+      <ion-label class="ion-text-start">{{ item?.name }}</ion-label>
+      <ion-label class="ion-text-center">{{ item?.quantity }} {{ item?.type }}</ion-label>
+      <ion-label class="ion-text-center">{{ item?.brand ?? "-" }}</ion-label>
       </ion-item>
     </ion-list>
   </ion-card-content>

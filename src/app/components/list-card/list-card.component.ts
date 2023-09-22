@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { ListsService } from 'src/app/services/lists.service';
 import { Item } from 'src/app/types/Item';
 
 @Component({
@@ -7,11 +7,17 @@ import { Item } from 'src/app/types/Item';
   templateUrl: './list-card.component.html',
   styleUrls: ['./list-card.component.scss'],
 })
-export class ListCardComponent {
-  constructor(private fb: FormBuilder) { }
+export class ListCardComponent implements OnInit {
 
-  items: Item[] = [];
-  lists: Array<any> = [];
+  constructor(private listsService: ListsService) { }
 
+  @Input('itemsList') list: any;
+  itemsList: Item[] = [];
+
+  ngOnChanges() {
+    this.itemsList = this.list
+  }
+
+  ngOnInit() { }
 
 }
