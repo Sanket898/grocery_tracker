@@ -1,83 +1,83 @@
-<form [formGroup]="itemForm">
-  <ion-item>
-    <ion-label aria-label="Name"></ion-label>
-    <ion-input formControlName="name" type="text" label="Name"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label aria-label="Brand"></ion-label>
-    <ion-input formControlName="brand" type="text" label="Brand"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label aria-label="Type"></ion-label>
-    <ion-select label="Type" placeholder="Select type" formControlName="type">
-      <ion-select-option value="kg">Kg</ion-select-option>
-      <ion-select-option value="lt">Litre</ion-select-option>
-      <ion-select-option value="pc">Pieces</ion-select-option>
-    </ion-select>
-  </ion-item>
-  <ion-item>
-    <ion-label aria-label="Quantity"></ion-label>
-    <ion-input
-      formControlName="quantity"
-      type="number"
-      label="Quantity"
-    ></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label aria-label="Price"></ion-label>
-    <ion-input
-      formControlName="price"
-      type="number"
-      label="Price"
-      (focusout)="onPriceChange()"
-    ></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label aria-label="Total"></ion-label>
-    <ion-input
-      readonly
-      formControlName="total"
-      type="number"
-      label="Total"
-    ></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-label aria-label="Note"></ion-label>
-    <ion-textarea
-      formControlName="note"
-      type="text"
-      label="Note"
-    ></ion-textarea>
-  </ion-item>
-  <ion-item>
-    <ion-label aria-label="Date"></ion-label>
-    <ion-input formControlName="date" type="date" label="Date"></ion-input>
-  </ion-item>
-  <ion-row>
-    <ion-col>
-      <ion-button
+<ion-item>
+  <ion-icon name="star" slot="start" color="warning"></ion-icon>
+  <ion-label color="warning">
+    <h1>Items Count: {{ tempList.length }}</h1>
+  </ion-label>
+</ion-item>
+
+<form [formGroup]="itemsListForm">
+  <ion-grid>
+    <ion-row>
+      <ion-item>
+        <ion-label aria-label="Title"></ion-label>
+        <ion-input formControlName="title" type="text" label="Title"></ion-input>
+      </ion-item>
+    </ion-row>
+
+    <ion-row expand="full">
+      <ion-item>
+        <ion-label aria-label="Date"></ion-label>
+        <ion-input formControlName="date" type="date" label="Date" readonly></ion-input>
+      </ion-item>
+    </ion-row>
+  </ion-grid>
+  </form>
+  <form [formGroup]="itemDetailsForm">
+    <ion-row>
+      <ion-item>
+        <ion-label aria-label="Name"></ion-label>
+        <ion-input formControlName="name" type="text" label="Name"></ion-input>
+      </ion-item>
+    </ion-row>
+
+    <ion-row>
+      <ion-item>
+        <ion-label aria-label="Brand"></ion-label>
+        <ion-input formControlName="brand" type="text" label="Brand"></ion-input>
+      </ion-item>
+    </ion-row>
+
+    <ion-row>
+      <ion-item>
+        <ion-label aria-label="Quantity"></ion-label>
+        <ion-input formControlName="quantity" type="number" label="Quantity"></ion-input>
+        <ion-select label="" placeholder="Select type" formControlName="type">
+          <ion-select-option value="kg">Kg</ion-select-option>
+          <ion-select-option value="lt">Litre</ion-select-option>
+          <ion-select-option value="pc">Pieces</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-row>
+
+    <ion-row>
+      <ion-item>
+        <ion-label aria-label="Note"></ion-label>
+        <ion-textarea formControlName="note" type="text" label="Note"></ion-textarea>
+      </ion-item>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-button
+        expand="full"
         type="submit"
         color="success"
         expand="block"
         (click)="saveItems()"
         >Save</ion-button
-      >
-    </ion-col>
-    <ion-col>
-      <ion-button
+        >
+        <!-- [disabled]="!itemsList.length" -->
+      </ion-col>
+      <ion-col>
+        <ion-button
+        expand="full"
         type="submit"
         color="secondary"
         expand="block"
-        (click)="addItem()"
-        routerLink="/create"
+        (click)="addItems()"
         >Add</ion-button
-      >
-    </ion-col>
-  </ion-row>
-  <ion-item>
-    <ion-icon name="star" slot="start" color="warning"></ion-icon>
-    <ion-label>
-      <h1>Items Count: {{ items.length }}</h1>
-    </ion-label>
-  </ion-item>
-</form>
+        >
+      </ion-col>
+    </ion-row>
+  </form>
+

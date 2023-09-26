@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ListsService } from './../../services/lists.service';
+import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { Item } from 'src/app/types/Item';
-import { ModalController } from '@ionic/angular';
-
+import { StorageService } from 'src/app/services/storage-service.service';
+import { ItemsList } from 'src/app/types/Item';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -12,48 +12,24 @@ import { ModalController } from '@ionic/angular';
   providers: [DatePipe]
 })
 export class Tab2Page {
-  constructor(private fb: FormBuilder, private datePipe: DatePipe, private modalController: ModalController) { }
 
-  items: Item[] = [];
-  lists: Array<any> = [];
-  formattedDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+  lists: Array<ItemsList> = [];
 
-  itemForm: FormGroup = this.fb.group({
-    name: ['', [Validators.required]],
-    brand: ['-'],
-    quantity: ['', [Validators.required]],
-    type: ['', [Validators.required]],
-    price: ['', [Validators.required]],
-    total: [0, [Validators.required]],
-    note: [''],
-    date: [this.formattedDate],
-  });
+  constructor(private storageService: StorageService) { }
 
-  public async addItem() {
-    let item = this.itemForm.value;
-    if (this.itemForm.valid) {
-      this.items.push(item)
-      this.itemForm.reset()
-    }
+  async ionViewDidEnter() {
+    await this.storageService.get('lists')?.then((data) => {
+      this.lists = data;
+    });
   }
 
-  public async saveItems() {
-    this.lists.push(this.items)
+  viewList(list: ItemsList) {
+    this.storageService.set('selectedList', list);
   }
 
-  public async onPriceChange() {
-    let quantity = this.itemForm.value.quantity;
-    let price = this.itemForm.value.price;
-
-    this.itemForm.controls['total'].setValue(quantity * price)
+  clearStorage() {
+    this.storageService.clear();
   }
-
-  viewList(list: any) {
-    console.log(list)
-  }
-
-
-
 }
 
 

@@ -1,0 +1,32 @@
+<ion-content>
+  <ion-item>
+    <h1>Total: {{selectedList?.total ?? 0 | currency: 'INR'}}</h1>
+  </ion-item>
+  <table>
+    <thead>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col class="ion-text-center"><h6>Sr.No</h6></ion-col>
+          <ion-col class="ion-text-center"><h6>Name</h6></ion-col>
+          <ion-col class="ion-text-center"><h6>Brand</h6></ion-col>
+          <ion-col class="ion-text-center"><h6>Qty</h6></ion-col>
+          <ion-col class="ion-text-center"><h6>Price</h6></ion-col>
+          <ion-col class="ion-text-center"><h6>Action</h6></ion-col>
+        </ion-row>
+      </ion-grid>
+    </thead>
+    <tbody>
+      <ion-row class="ion-align-items-center" *ngFor="let list of selectedList?.items; let i = index">
+        <ion-col class="ion-text-center">{{i + 1}}</ion-col>
+        <ion-col class="ion-text-center">{{list?.name}}</ion-col>
+        <ion-col class="ion-text-center">{{list?.brand | uppercase}}</ion-col>
+        <ion-col class="ion-text-center">{{list?.quantity}} {{list?.type | uppercase}}</ion-col>
+        <ion-col class="ion-text-center"><ion-input [value]="list?.price" type="number"></ion-input></ion-col>
+        <ion-col class="ion-text-center">
+          <ion-checkbox [checked]="list?.checked"></ion-checkbox>
+        </ion-col>
+      </ion-row>
+      <!-- Add more rows as needed -->
+    </tbody>
+  </table>
+</ion-content>

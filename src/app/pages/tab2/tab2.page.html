@@ -1,10 +1,23 @@
-<ion-content color="light">
-  <ion-header collapse="condense">
+<ion-content>
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">List</ion-title>
+      <ion-title size="large" class="ion-text-center"> List </ion-title>
     </ion-toolbar>
   </ion-header>
-  <app-list-card></app-list-card>
+
+  <ng-container *ngIf="lists?.length">
+    <ion-grid>
+      <ion-row *ngFor="let list of lists" size="12" routerLink="/tabs/lists/view-list" (click)="viewList(list)" class="ion-margin">
+        <ion-col>
+          <app-list-card [itemsList]="list"></app-list-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+          <ion-item>
+        <ion-icon name="trash-outline" size="large" color="danger" slot="end" (click)="clearStorage()"></ion-icon>
+      </ion-item>
+  </ng-container>
+
   <ion-fab vertical="bottom" horizontal="center">
     <ion-fab-button id="open-custom-dialog" expand="block">
       <ion-icon name="add" routerLink="/tabs/lists/create"></ion-icon>

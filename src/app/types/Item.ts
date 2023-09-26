@@ -1,10 +1,17 @@
 export interface Item {
   name: string,
   brand: string,
-  quantity: number,
+  category: string,
   type: string,
-  price: string,
-  total: number,
+  quantity: number,
+  price: number,
   note: string,
-  date: Date
+  checked: boolean,
+}
+
+export interface ItemsList {
+  title: string,
+  date: Date,
+  items: Item[],
+  total: number
 }
