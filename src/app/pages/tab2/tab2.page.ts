@@ -2,6 +2,8 @@ import { ListsService } from './../../services/lists.service';
 import { Component, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { StorageService } from 'src/app/services/storage-service.service';
+import { ItemsList } from 'src/app/types/Item';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -11,18 +13,22 @@ import { StorageService } from 'src/app/services/storage-service.service';
 })
 export class Tab2Page {
 
-  lists: Array<any> = [];
+  lists: Array<ItemsList> = [];
 
-  constructor(private listsService: ListsService, private storageService: StorageService) { }
+  constructor(private storageService: StorageService) { }
 
   async ionViewDidEnter() {
-    this.listsService.lists.subscribe(data => {
-      this.lists = data;
-    });
-
     await this.storageService.get('lists')?.then((data) => {
       this.lists = data;
     });
+  }
+
+  viewList(list: ItemsList) {
+    this.storageService.set('selectedList', list);
+  }
+
+  clearStorage() {
+    this.storageService.clear();
   }
 }
 

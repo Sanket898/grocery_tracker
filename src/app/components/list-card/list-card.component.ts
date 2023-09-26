@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ListsService } from 'src/app/services/lists.service';
-import { Item } from 'src/app/types/Item';
+import { ItemsList } from 'src/app/types/Item';
 
 @Component({
   selector: 'app-list-card',
@@ -11,11 +11,12 @@ export class ListCardComponent implements OnInit {
 
   constructor(private listsService: ListsService) { }
 
-  @Input('itemsList') list: any;
-  itemsList: Item[] = [];
+  @Input('itemsList') list!: ItemsList;
+
+  itemsList!: ItemsList | null;
 
   ngOnChanges() {
-    this.itemsList = this.list
+    this.itemsList = this.list;
   }
 
   ngOnInit() { }

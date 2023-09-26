@@ -5,17 +5,17 @@
     </ion-toolbar>
   </ion-header>
 
-  <ng-container *ngIf="lists.length">
-    <!-- <ion-item > -->
-      <ion-grid>
-        <ion-row>
-          <ion-col *ngFor="let list of lists" size="12">
-            <app-list-card [itemsList]="list"></app-list-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-
-    <!-- </ion-item> -->
+  <ng-container *ngIf="lists?.length">
+    <ion-grid>
+      <ion-row *ngFor="let list of lists" size="12" routerLink="/tabs/lists/view-list" (click)="viewList(list)" class="ion-margin">
+        <ion-col>
+          <app-list-card [itemsList]="list"></app-list-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+          <ion-item>
+        <ion-icon name="trash-outline" size="large" color="danger" slot="end" (click)="clearStorage()"></ion-icon>
+      </ion-item>
   </ng-container>
 
   <ion-fab vertical="bottom" horizontal="center">
