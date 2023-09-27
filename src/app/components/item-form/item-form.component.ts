@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { Tab2Page } from 'src/app/pages/tab2/tab2.page';
 
 @Component({
   selector: 'app-item-form',
@@ -16,6 +17,7 @@ export class ItemFormComponent {
 
   itemsListForm!: FormGroup;
   itemDetailsForm!: FormGroup;
+  component = Tab2Page;
 
   formattedDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
   tempList: ItemsList[] = [];
