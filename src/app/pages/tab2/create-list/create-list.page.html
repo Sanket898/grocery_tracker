@@ -12,9 +12,17 @@
 </ion-header> -->
 <ion-content >
   <ion-grid>
-    <ion-row class="">
+    <ion-row>
       <ion-col>
         <app-item-form></app-item-form>
+      </ion-col>
+    </ion-row>
+    <ion-row class="view-list">
+      <ion-col>
+        <h1>
+          View list
+        </h1>
+        <ion-icon name="eye-outline" (click)="viewList()"></ion-icon>
       </ion-col>
     </ion-row>
   </ion-grid>

@@ -9,4 +9,8 @@ export class CreateListPage {
 
   constructor() { }
 
+  async viewList() {
+
+  }
+
 }

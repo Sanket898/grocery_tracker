@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ItemFormComponent } from './item-form/item-form.component';
+import { ListModalComponent } from './list-modal/list-modal.component';
 
 
 
 @NgModule({
-  declarations: [ItemFormComponent, ListCardComponent],
+  declarations: [ItemFormComponent, ListCardComponent, ListModalComponent],
   imports: [
     CommonModule,
     IonicModule,
