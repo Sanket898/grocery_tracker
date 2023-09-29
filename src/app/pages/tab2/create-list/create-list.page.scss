@@ -1,3 +1,26 @@
-.view-list{
-  color:#1f2b2e;
+@mixin header-col {
+  box-sizing: border-box;
+  height: 4.4rem;
+  display: flex;
+  align-items: center;
+}
+
+ion-toolbar {
+  --background: #ff4317;
+}
+
+.header-col-1 {
+  @include header-col;
+  justify-content: center;
+}
+
+.header-col-2 {
+  @include header-col;
+  padding-bottom: 13px;
+  justify-content: start;
+}
+
+.view-list {
+  color: #ff4317;
+  font-size: 18px;
 }
