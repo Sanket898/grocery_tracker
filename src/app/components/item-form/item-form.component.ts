@@ -1,10 +1,10 @@
-import { ItemsList } from './../../types/Item';
+import { Item, ItemsList } from './../../types/Item';
 import { StorageService } from './../../services/storage-service.service';
-import { ListsService } from './../../services/lists.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { Tab2Page } from 'src/app/pages/tab2/tab2.page';
 
 @Component({
   selector: 'app-item-form',
@@ -12,26 +12,26 @@ import { Router } from '@angular/router';
   styleUrls: ['./item-form.component.scss'],
   providers: [DatePipe]
 })
-export class ItemFormComponent {
+export class ItemFormComponent implements OnInit {
 
   itemsListForm!: FormGroup;
   itemDetailsForm!: FormGroup;
+  component = Tab2Page;
 
   formattedDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-  tempList: ItemsList[] = [];
+  tempList: Item[] = [];
 
   constructor(
     private fb: FormBuilder,
     private datePipe: DatePipe,
-    private listsService: ListsService,
     private router: Router,
     private storageService: StorageService,
   ) {
     this.itemsListForm = this.fb.group({
-      title: [null, [Validators.required]],
+      title: [null],
       date: [this.formattedDate, [Validators.required]],
       items: [null],
-      total: [null],
+      total: [0],
     });
 
     this.itemDetailsForm = this.fb.group({
@@ -44,11 +44,17 @@ export class ItemFormComponent {
       checked: [false],
     });
   }
+  async ngOnInit() {
+    await this.storageService.get('tempList')?.then(data => {
+      data ? this.tempList = data : null;
+    });
+  }
 
   public async addItems() {
-    let value = this.itemDetailsForm.value;
+    let value: Item = this.itemDetailsForm.value;
     this.tempList.push(value);
     this.itemsListForm.controls['items'].setValue(this.tempList)
+    this.storageService.set('tempList', this.itemsListForm.value);
     this.itemDetailsForm.reset();
   }
 
@@ -67,6 +73,7 @@ export class ItemFormComponent {
     this.router.navigateByUrl('/tabs/lists');
 
     this.itemsListForm.reset();
+    this.storageService.remove('tempList');
   }
 
 }

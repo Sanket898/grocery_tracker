@@ -1,7 +1,17 @@
 <ion-content>
   <ion-item>
-    <h1>Total: {{selectedList?.total ?? 0 | currency: 'INR'}}</h1>
+    <ion-grid>
+      <ion-row class="ion-align-items-center ion-justify-content-start">
+        <ion-col size="2" class="ion-text-start">
+          <ion-icon name="arrow-back-circle-outline" size="large" routerLink="/tabs/lists"></ion-icon>
+        </ion-col>
+        <ion-col size="10" class="ion-text-start">
+          <h1>Total: {{selectedList?.total ?? 0 | currency: 'INR'}}</h1>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-item>
+
   <table>
     <thead>
       <ion-grid>

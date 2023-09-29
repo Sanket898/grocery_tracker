@@ -16,7 +16,7 @@
 @import "@ionic/angular/css/normalize.css";
 @import "@ionic/angular/css/structure.css";
 @import "@ionic/angular/css/typography.css";
-@import '@ionic/angular/css/display.css';
+@import "@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "@ionic/angular/css/padding.css";
@@ -24,3 +24,39 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+* {
+  font-family: "Poppins", sans-serif;
+}
+
+/* custom-styles.css */
+ion-alert {
+  color: #333;
+}
+.alert-radio-group.sc-ion-alert-md,
+.alert-checkbox-group.sc-ion-alert-md {
+  border-top: none;
+  border-bottom: none;
+}
+.alert-radio-label.sc-ion-alert-md {
+  color: #1f2b2e;
+  padding-bottom: 0px;
+}
+
+.alert-head.sc-ion-alert-md {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  text-align: start;
+}
+
+[aria-checked="true"].sc-ion-alert-md .alert-radio-label.sc-ion-alert-md {
+  color: #1f2b2e;
+}
+.sc-ion-input-md-h:not(.legacy-input) {
+  min-height: 35px;
+}
+
+.native-input.sc-ion-input-md {
+  padding-left: 12px;
+}
+
