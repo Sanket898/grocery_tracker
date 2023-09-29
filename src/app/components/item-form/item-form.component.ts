@@ -1,10 +1,9 @@
-import { Item } from './../../types/Item';
+import { ItemsList } from './../../types/Item';
 import { StorageService } from './../../services/storage-service.service';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
-import { Tab2Page } from 'src/app/pages/tab2/tab2.page';
 
 @Component({
   selector: 'app-item-form',
@@ -15,11 +14,9 @@ import { Tab2Page } from 'src/app/pages/tab2/tab2.page';
 export class ItemFormComponent implements OnInit {
 
   itemsListForm!: FormGroup;
-  itemDetailsForm!: FormGroup;
-  component = Tab2Page;
+  tempList!: ItemsList;
 
   formattedDate = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-  tempList: Item[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -36,7 +33,9 @@ export class ItemFormComponent implements OnInit {
   }
   async ngOnInit() {
     await this.storageService.get('tempList')?.then(data => {
+      console.log('first')
       data ? this.tempList = data : null;
+      this.patchFormValues(this.tempList);
     });
   }
 
@@ -56,7 +55,6 @@ export class ItemFormComponent implements OnInit {
     });
 
     this.items?.push(itemDetailsForm);
-
     this.storageService.set('tempList', this.itemsListForm.value);
   }
 
@@ -80,5 +78,13 @@ export class ItemFormComponent implements OnInit {
     this.storageService.remove('tempList');
   }
 
+  patchFormValues(data: ItemsList) {
+    this.itemsListForm.patchValue({
+      title: data?.title,
+      date: data?.date,
+      items: data?.items,
+      total: data?.total,
+    });
+  }
 }
 
