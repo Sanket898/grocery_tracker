@@ -1,7 +1,7 @@
-import { Item, ItemsList } from './../../types/Item';
+import { Item } from './../../types/Item';
 import { StorageService } from './../../services/storage-service.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { Tab2Page } from 'src/app/pages/tab2/tab2.page';
@@ -30,18 +30,8 @@ export class ItemFormComponent implements OnInit {
     this.itemsListForm = this.fb.group({
       title: [null],
       date: [this.formattedDate, [Validators.required]],
-      items: [null],
+      items: this.fb.array([]),
       total: [0],
-    });
-
-    this.itemDetailsForm = this.fb.group({
-      name: ['', [Validators.required]],
-      brand: [null],
-      type: ['', [Validators.required]],
-      quantity: ['', [Validators.required]],
-      category: [null],
-      note: [null],
-      checked: [false],
     });
   }
   async ngOnInit() {
@@ -50,17 +40,31 @@ export class ItemFormComponent implements OnInit {
     });
   }
 
-  public async addItems() {
-    let value: Item = this.itemDetailsForm.value;
-    this.tempList.push(value);
-    this.itemsListForm.controls['items'].setValue(this.tempList)
-    this.storageService.set('tempList', this.itemsListForm.value);
-    this.itemDetailsForm.reset();
+  get items(): FormArray {
+    return this.itemsListForm?.get('items') as FormArray;
   }
 
-  removeItem(index: number) { }
+  addItem() {
+    const itemDetailsForm = this.fb.group({
+      name: ['', [Validators.required]],
+      brand: [null],
+      type: ['', [Validators.required]],
+      quantity: ['', [Validators.required]],
+      category: [null],
+      note: [null],
+      checked: [false],
+    });
 
-  public async saveItems() {
+    this.items?.push(itemDetailsForm);
+
+    this.storageService.set('tempList', this.itemsListForm.value);
+  }
+
+  removeItem(index: number) {
+    this.items?.removeAt(index);
+  }
+
+  async saveItems() {
     let savedLists = [];
 
     await this.storageService.get('lists')?.then(data => {

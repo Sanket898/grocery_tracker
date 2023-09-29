@@ -20,7 +20,18 @@ ion-toolbar {
   justify-content: start;
 }
 
+.header-col-3 {
+  @include header-col;
+}
+
 .view-list {
   color: #ff4317;
   font-size: 18px;
+}
+
+ion-button {
+  width: 100%;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
 }

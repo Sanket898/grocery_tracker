@@ -9,14 +9,6 @@ import { ItemFormComponent } from 'src/app/components/item-form/item-form.compon
 })
 export class CreateListPage {
 
-  constructor(private modalCtrl: ModalController) { }
-
-  async viewList() {
-    const modal = await this.modalCtrl.create({
-      component: ItemFormComponent
-    });
-
-    await modal.present()
-  }
+  constructor() { }
 
 }

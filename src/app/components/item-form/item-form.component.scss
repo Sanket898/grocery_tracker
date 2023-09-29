@@ -1,35 +1,32 @@
-ion-content {
-  width: 100%;
-  height: 38vh;
+@mixin text-style {
+  color: #1f2b2e;
+  font-size: 13px;
+  font-weight: 400;
 }
 
 ion-item {
+  width: 100%;
+  --padding-end: 0px;
   --background: #fefaf7;
 }
 
 ion-label {
+  @include text-style;
   width: 100%;
   padding: 0px 12px;
-  color: #1f2b2e;
-  font-size: 15px;
-  font-weight: 400;
 }
 
 ion-input {
+  @include text-style;
   border: 1px solid #dddddd;
   border-radius: 6px;
-  color: #1f2b2e;
-  font-size: 15px;
-  font-weight: 400;
 }
 
 ion-textarea {
+  @include text-style;
   border: 1px solid #dddddd;
   border-radius: 6px;
   padding: 0px 12px;
-  color: #1f2b2e;
-  font-size: 15px;
-  font-weight: 400;
 }
 
 ion-select {
@@ -41,13 +38,12 @@ ion-select {
 }
 
 ion-select::part(placeholder) {
-  font-size: 12px;
-  font-weight: 400;
+  @include text-style;
 }
 
 ion-select::part(container) {
+  @include text-style;
   width: 100%;
-  color: #1f2b2e;
 }
 
 ion-select::part(icon) {
@@ -71,4 +67,23 @@ ion-title {
 
 h1 {
   color: #1f2b2e;
+}
+
+.act-col {
+  @include text-style;
+  font-size: large;
+  display: flex;
+  align-items: center;
+}
+
+.add-row-text {
+  @include text-style;
+  font-size: 15px;
+  color: #ff4317;
+}
+
+.save-btn {
+  position: fixed;
+  bottom: 0px;
+  left: 5rem;
 }

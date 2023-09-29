@@ -4,12 +4,18 @@
       <ion-col size="2" class="header-col-1">
         <ion-icon name="arrow-back-circle-outline" size="large" routerLink="/tabs/lists"></ion-icon>
       </ion-col>
-      <ion-col size="10" class="header-col-2">
+      <ion-col size="6" class="header-col-2">
         <h1>Create List</h1>
+      </ion-col>
+      <ion-col size="3" class="header-col-3">
+        <ion-button color="success">
+          Save
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
   <ion-grid>
     <ion-row>
@@ -17,10 +23,6 @@
         <app-item-form></app-item-form>
       </ion-col>
     </ion-row>
-    <ion-row class="view-list">
-      <h6 class="ion-padding-start ion-margin-start" (click)="viewList()">
-        View list
-      </h6>
-    </ion-row>
   </ion-grid>
 </ion-content>
+
