@@ -1,11 +1,11 @@
 @mixin header-col {
   box-sizing: border-box;
-  height: 4.4rem;
+  height: 3.5rem;
   display: flex;
   align-items: center;
 }
 
-ion-toolbar {
+.header-toolbar {
   --background: #ff4317;
 }
 
@@ -29,9 +29,9 @@ ion-toolbar {
   font-size: 18px;
 }
 
-ion-button {
-  width: 100%;
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
-}
+// ion-button {
+//   width: 100%;
+//   color: white;
+//   font-size: 1rem;
+//   font-weight: 600;
+// }

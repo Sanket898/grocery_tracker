@@ -12,8 +12,12 @@ const routes: Routes = [
     loadChildren: () => import('./create-list/create-list.module').then(m => m.CreateListPageModule)
   },
   {
-    path: 'view-list',
-    loadChildren: () => import('./view-list/view-list.module').then( m => m.ViewListPageModule)
+    path: 'view-list/:id',
+    loadChildren: () => import('./view-list/view-list.module').then(m => m.ViewListPageModule)
+  },
+  {
+    path: 'edit-list/:id',
+    loadChildren: () => import('./create-list/create-list.module').then(m => m.CreateListPageModule)
   },
 ];
 

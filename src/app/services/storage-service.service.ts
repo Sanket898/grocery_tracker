@@ -23,7 +23,7 @@ export class StorageService {
   }
 
   public get(key: string) {
-    let value = this._storage?.get(key);
+    let value = this.storage?.get(key);
     return value;
   }
 

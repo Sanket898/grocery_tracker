@@ -23,7 +23,7 @@ export class Tab2Page {
     });
   }
 
-  viewList(list: ItemsList) {
+  viewList(list: ItemsList, index: number) {
     this.storageService.set('selectedList', list);
   }
 

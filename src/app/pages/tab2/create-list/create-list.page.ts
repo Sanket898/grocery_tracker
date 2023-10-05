@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { ItemFormComponent } from 'src/app/components/item-form/item-form.component';
+import { ListsService } from 'src/app/services/lists.service';
+import { StorageService } from 'src/app/services/storage-service.service';
+import { ItemsList } from 'src/app/types/Item';
 
 @Component({
   selector: 'app-create-list',
@@ -9,6 +12,19 @@ import { ItemFormComponent } from 'src/app/components/item-form/item-form.compon
 })
 export class CreateListPage {
 
-  constructor() { }
+  tempList!: ItemsList | null;
 
+  @ViewChild('child', { static: false }) child!: ItemFormComponent;
+
+  constructor(private listsService: ListsService, private storageService: StorageService, private router: Router) { }
+
+  async ionViewDidEnter() {
+    await this.storageService.get('tempList').then(data => this.tempList = data);
+
+    this.listsService.itemsList.subscribe(data => this.tempList = data);
+  }
+
+  saveItemsList() {
+    this.child.saveItemsList();
+  }
 }

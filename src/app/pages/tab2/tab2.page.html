@@ -7,15 +7,12 @@
 
   <ng-container *ngIf="lists?.length">
     <ion-grid>
-      <ion-row *ngFor="let list of lists" size="12" routerLink="/tabs/lists/view-list" (click)="viewList(list)" class="ion-margin">
+      <ion-row *ngFor="let list of lists; let i = index" size="12" routerLink="/tabs/lists/view-list/{{list._id}}"class="ion-margin">
         <ion-col>
           <app-list-card [itemsList]="list"></app-list-card>
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-item>
-      <ion-icon name="trash-outline" size="large" color="danger" slot="end" (click)="clearStorage()"></ion-icon>
-    </ion-item>
   </ng-container>
 
   <ion-fab vertical="bottom" horizontal="center">

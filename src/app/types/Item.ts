@@ -10,6 +10,7 @@ export interface Item {
 }
 
 export interface ItemsList {
+  _id: string,
   title: string,
   date: Date,
   items: Item[],
