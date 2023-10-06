@@ -5,7 +5,7 @@
         <ion-icon name="arrow-back-circle-outline" size="large" routerLink="/tabs/lists"></ion-icon>
       </ion-col>
       <ion-col size="6" class="header-col-2">
-        <h1>Create List</h1>
+        <h1>{{title}}</h1>
       </ion-col>
     </ion-row>
   </ion-toolbar>
@@ -15,7 +15,52 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <app-item-form #child></app-item-form>
+        <form [formGroup]="itemsListForm">
+          <ion-grid>
+            <ion-row>
+              <ion-label class="ion-no-padding">Title</ion-label>
+              <ion-input formControlName="title" type="text" placeholder="Ente title" class="ion-margin-bottom"></ion-input>
+            </ion-row>
+
+            <ng-container formArrayName="items">
+              <ion-row *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
+                <ion-col size="1" class="act-col">{{ i + 1}}</ion-col>
+                <ion-col size="10">
+                <ion-row>
+                  <ion-col>
+                    <ion-input formControlName="name" type="text" placeholder="Enter name"></ion-input>
+                  </ion-col>
+                  <ion-col>
+                    <ion-input formControlName="brand" type="text" placeholder="Brand name"></ion-input>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <ion-input formControlName="quantity" type="number" placeholder="Quantity"></ion-input>
+                  </ion-col>
+                  <ion-col>
+                    <ion-select formControlName="type" placeholder="Select type">
+                      <ion-select-option value="kg">Kg</ion-select-option>
+                      <ion-select-option value="lt">Litre</ion-select-option>
+                      <ion-select-option value="pc">Pieces</ion-select-option>
+                    </ion-select>
+                  </ion-col>
+                </ion-row>
+              </ion-col>
+              <ion-col size="1" class="act-col">
+                <ion-icon name="trash-outline" color="danger" size="default" (click)="removeItem(i)"></ion-icon>
+              </ion-col>
+              </ion-row>
+            </ng-container>
+
+            <ion-row class="ion-justify-content-center add-row-text">
+              <ion-col size="4" (click)="addItem()" class="ion-text-center">
+                Add Item
+                <ion-icon name="add-circle-outline"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </form>
       </ion-col>
     </ion-row>
   </ion-grid>

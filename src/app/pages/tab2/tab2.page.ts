@@ -27,6 +27,10 @@ export class Tab2Page {
     this.storageService.set('selectedList', list);
   }
 
+  onClick() {
+    this.storageService.remove('tempList');
+  }
+
   clearStorage() {
     this.storageService.clear();
   }
