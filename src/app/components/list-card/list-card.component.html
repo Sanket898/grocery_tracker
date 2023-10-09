@@ -1,9 +1,26 @@
 <ion-card class="ion-no-margin">
-  <ion-card-header>
-    <ion-card-title>{{itemsList?.title}}</ion-card-title>
-    <ion-card-subtitle>{{itemsList?.date | date: 'MMMM d, y'}}</ion-card-subtitle>
-    <ion-icon name="create-outline" size="large" slot="end"></ion-icon>
+  <ion-card-header class="">
+    <ion-grid class="ion-no-margin">
+      <ion-row class="ion-align-items-center">
+        <ion-col size="8" class="ion-text-start">
+          <ion-card-title>{{itemsList.title}}</ion-card-title>
+          <ion-text>
+            <ion-card-subtitle>{{itemsList.date | date: 'MMMM d, y'}}</ion-card-subtitle>
+          </ion-text>
+        </ion-col>
+        <ion-col size="4" class="ion-justify-content-between" style="display: flex;">
+          <ion-icon name="star" *ngIf="itemsList.isStarred" (click)="removeFromStarredList($event, itemsList);"></ion-icon>
+          <ion-icon name="star-outline" *ngIf="!itemsList.isStarred && this.router.url === '/tabs/lists'" (click)="addToStarredList($event, itemsList)"></ion-icon>
+          <ion-icon name="pencil-outline" (click)="editList($event, itemsList._id)"></ion-icon>
+          <ion-icon name="trash-outline" (click)="deleteList($event, itemsList._id)"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-card-header>
   <ion-card-content>
+    <ion-title class="ion-no-padding">
+      Items:
+      {{itemsList.items.length}}
+    </ion-title>
   </ion-card-content>
 </ion-card>

@@ -1,9 +1,7 @@
-import { ListsService } from './../../services/lists.service';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { StorageService } from 'src/app/services/storage-service.service';
 import { ItemsList } from 'src/app/types/Item';
-import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -17,14 +15,22 @@ export class Tab2Page {
 
   constructor(private storageService: StorageService) { }
 
+  async ionViewWillEnter() {
+    this.storageService.remove('tempList');
+  }
+
   async ionViewDidEnter() {
     await this.storageService.get('lists')?.then((data) => {
       this.lists = data;
     });
   }
 
-  viewList(list: ItemsList) {
+  viewList(list: ItemsList, index: number) {
     this.storageService.set('selectedList', list);
+  }
+
+  onClick() {
+    this.storageService.remove('tempList');
   }
 
   clearStorage() {

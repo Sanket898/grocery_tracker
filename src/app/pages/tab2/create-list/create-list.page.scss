@@ -1,11 +1,17 @@
 @mixin header-col {
   box-sizing: border-box;
-  height: 4.4rem;
+  height: 3.5rem;
   display: flex;
   align-items: center;
 }
 
-ion-toolbar {
+@mixin text-style {
+  font-size: 13px;
+  font-weight: 400;
+  color: #1f2b2e;
+}
+
+.header-toolbar {
   --background: #ff4317;
 }
 
@@ -17,10 +23,79 @@ ion-toolbar {
 .header-col-2 {
   @include header-col;
   padding-bottom: 13px;
-  justify-content: start;
+  justify-content: flex-start;
 }
 
-.view-list {
+ion-label {
+  @include text-style;
+  width: 100%;
+  padding: 0px 12px;
+}
+
+ion-input {
+  @include text-style;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+}
+
+ion-textarea {
+  @include text-style;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  padding: 0px 12px;
+}
+
+ion-select {
+  min-height: 35px;
+  padding: 0px 12px;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  --placeholder-color: #1f2b2e;
+}
+
+ion-select::part(placeholder) {
+  @include text-style;
+}
+
+ion-select::part(container) {
+  @include text-style;
+  width: 100%;
+}
+
+ion-select::part(icon) {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+ion-button {
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  --background: #ff4317;
+}
+
+ion-title {
+  color: #1f2b2e;
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 0px;
+}
+
+.act-col {
+  @include text-style;
+  font-size: large;
+  display: flex;
+  align-items: center;
+}
+
+.add-row-text {
+  @include text-style;
+  font-size: 15px;
   color: #ff4317;
-  font-size: 18px;
+}
+
+.save-btn {
+  position: fixed;
+  bottom: 0px;
+  left: 5rem;
 }

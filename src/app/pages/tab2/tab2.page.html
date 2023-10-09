@@ -1,26 +1,28 @@
-<ion-content>
-  <ion-header>
-    <ion-toolbar>
-      <ion-title size="large" class="ion-text-center"> List </ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-header>
+  <ion-toolbar class="header-toolbar">
+    <ion-row>
+      <ion-col size="12" class="header-col">
+        <ion-title class="ion-text-center">Lists</ion-title>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
 
+<ion-content>
   <ng-container *ngIf="lists?.length">
     <ion-grid>
-      <ion-row *ngFor="let list of lists" size="12" routerLink="/tabs/lists/view-list" (click)="viewList(list)" class="ion-margin">
+      <ion-row *ngFor="let list of lists; let i = index" size="12" routerLink="/tabs/lists/view-list/{{list._id}}" class="ion-margin">
         <ion-col>
           <app-list-card [itemsList]="list"></app-list-card>
         </ion-col>
       </ion-row>
     </ion-grid>
-          <ion-item>
-        <ion-icon name="trash-outline" size="large" color="danger" slot="end" (click)="clearStorage()"></ion-icon>
-      </ion-item>
   </ng-container>
-
   <ion-fab vertical="bottom" horizontal="center">
     <ion-fab-button id="open-custom-dialog" expand="block">
-      <ion-icon name="add" routerLink="/tabs/lists/create"></ion-icon>
+      <ion-icon name="add" routerLink="/tabs/lists/create" (click)="onClick()"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>
+
+<ion-footer></ion-footer>
