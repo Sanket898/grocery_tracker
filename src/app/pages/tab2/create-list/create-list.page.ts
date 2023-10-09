@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ItemsList } from 'src/app/types/Item';
 import { StorageService } from 'src/app/services/storage-service.service';
 import { ListsService } from 'src/app/services/lists.service';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-create-list',
@@ -26,6 +27,10 @@ export class CreateListPage {
     private listsService: ListsService,
     private activatedRoute: ActivatedRoute,
   ) {
+    this.initForm();
+  }
+
+  initForm() {
     this.itemsListForm = this.fb.group({
       _id: [null],
       title: [null],
@@ -36,22 +41,24 @@ export class CreateListPage {
   }
 
   async ionViewWillEnter() {
+    await this.storageService.get('lists')?.then(data => {
+      data ? this.savedLists = data : null;
+    });
+
     this.activatedRoute.params.subscribe((data: any) => {
+      data.id != undefined ? this.title = 'Edit List' : this.title;
       this.savedLists.map(list => {
         if (list._id == data.id) {
-          this.router.url == `/tabs/lists/edit-list/${data.id}` ? this.title = 'Edit List' : this.title;
           this.storageService.set('tempList', list);
         }
       });
     });
+  }
 
+  async ionViewDidEnter() {
     await this.storageService.get('tempList')?.then(data => {
       data ? this.tempList = data : null;
       this.patchFormValues(this.tempList);
-    });
-
-    await this.storageService.get('lists')?.then(data => {
-      data ? this.savedLists = data : null;
     });
   }
 
@@ -80,35 +87,31 @@ export class CreateListPage {
   }
 
   saveItemsList() {
-    if (this.itemsListForm.valid) {
-      if (this.title == 'Create List') {
-        // generate unique Id
-        this.itemsListForm.value._id = this.listsService.generateUniqueId();
+    if (this.title == 'Create List') {
+      this.itemsListForm.value._id = this.listsService.generateUniqueId();
 
-        this.savedLists?.push(this.itemsListForm.value);
-        this.storageService.set('lists', this.savedLists);
-        this.listsService.lists.next(this.savedLists)
-        this.router.navigateByUrl('/tabs/lists');
-        this.itemsListForm.reset();
-        this.storageService.remove('tempList');
-      } else if (this.title == 'Edit List') {
-        let newList: any = [];
-        newList = this.savedLists.map(list => {
-          if (list?._id == this.tempList?._id) {
-            list = this.itemsListForm.value
-          };
-        });
-        this.storageService.set('lists', newList);
-        this.listsService.lists.next(newList)
-        this.router.navigateByUrl('/tabs/lists');
-        this.itemsListForm.reset();
-        this.storageService.remove('tempList');
-      };
-    }
+      this.savedLists?.push(this.itemsListForm.value);
+      this.storageService.set('lists', this.savedLists);
+      this.listsService.lists.next(this.savedLists)
+      this.itemsListForm.reset();
+    } else if (this.title == 'Edit List') {
+      let i = 0;
+      this.savedLists.map((list, index) => {
+        if (list?._id == this.tempList?._id) {
+          i = index;
+          // this.itemsListForm.value._id = list?._id;
+        };
+        this.savedLists.splice(i, 1, this.itemsListForm.value);
+      });
+      this.storageService.set('lists', this.savedLists);
+      this.listsService.lists.next(this.savedLists)
+      this.itemsListForm.reset();
+    };
   }
 
   patchFormValues(data: ItemsList | null) {
     this.itemsListForm.patchValue({
+      _id: data?._id,
       title: data?.title,
       date: data?.date,
       total: data?.total,

@@ -17,6 +17,10 @@ export class Tab2Page {
 
   constructor(private storageService: StorageService) { }
 
+  async ionViewWillEnter() {
+    this.storageService.remove('tempList');
+  }
+
   async ionViewDidEnter() {
     await this.storageService.get('lists')?.then((data) => {
       this.lists = data;
