@@ -14,5 +14,6 @@ export interface ItemsList {
   title: string,
   date: Date,
   items: Item[],
-  total: number
+  total: number,
+  isStarred: boolean
 }

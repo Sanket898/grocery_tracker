@@ -87,6 +87,7 @@ export class CreateListPage {
   }
 
   saveItemsList() {
+    this.itemsListForm.value.date = new Date();
     if (this.title == 'Create List') {
       this.itemsListForm.value._id = this.listsService.generateUniqueId();
 
@@ -99,7 +100,6 @@ export class CreateListPage {
       this.savedLists.map((list, index) => {
         if (list?._id == this.tempList?._id) {
           i = index;
-          // this.itemsListForm.value._id = list?._id;
         };
         this.savedLists.splice(i, 1, this.itemsListForm.value);
       });
