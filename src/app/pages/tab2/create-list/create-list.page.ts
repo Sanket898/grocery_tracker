@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { ItemsList } from 'src/app/types/Item';
 import { StorageService } from 'src/app/services/storage-service.service';
 import { ListsService } from 'src/app/services/lists.service';
-import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-create-list',
@@ -22,7 +21,6 @@ export class CreateListPage {
 
   constructor(
     private fb: FormBuilder,
-    private router: Router,
     private storageService: StorageService,
     private listsService: ListsService,
     private activatedRoute: ActivatedRoute,
