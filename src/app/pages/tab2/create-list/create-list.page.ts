@@ -19,6 +19,15 @@ export class CreateListPage {
   tempList!: ItemsList | null;
   savedLists: ItemsList[] = [];
 
+  tableHeader: Array<any> = [
+    { title: 'No.', size: '1' },
+    { title: 'Name', size: '3' },
+    { title: 'Qty', size: '2' },
+    { title: 'Type', size: '2' },
+    { title: 'Price', size: '2' },
+    { title: '', size: '1' },
+  ];
+
   constructor(
     private fb: FormBuilder,
     private storageService: StorageService,
@@ -36,7 +45,7 @@ export class CreateListPage {
       items: this.fb.array([]),
       total: [0],
     });
-  }
+  };
 
   async ionViewWillEnter() {
     await this.storageService.get('lists')?.then(data => {
@@ -73,6 +82,7 @@ export class CreateListPage {
       category: [null],
       note: [null],
       checked: [false],
+      price: [0],
     });
 
     this.items?.push(itemDetailsForm);
@@ -127,6 +137,7 @@ export class CreateListPage {
         category: [item?.category],
         note: [item?.note],
         checked: [item?.checked],
+        price: [item?.price],
       });
       this.items?.push(temp);
     });

@@ -8,14 +8,15 @@ import { ItemsList } from '../types/Item';
 
 export class ListsService {
 
-  private myArray: Array<ItemsList> = [];
   itemsList = new Subject<ItemsList>();
   lists = new Subject<ItemsList[]>();
-  starredList = new Subject<ItemsList[]>();
+  starredList: ItemsList[] = [];
 
-  addToStarredList(itemsList: ItemsList) {
-    this.myArray.push(itemsList);
-    this.starredList.next([...this.myArray])
+  addToStarredList(itemList: ItemsList) {
+    let flag = this.starredList.find(list => list._id == itemList._id);
+    if (flag) {
+      this.starredList.push(itemList);
+    }
   }
 
   // Function to generate a unique alphanumeric ID
