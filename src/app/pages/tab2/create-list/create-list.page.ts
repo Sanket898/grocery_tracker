@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
-import { ItemsList } from 'src/app/types/Item';
+import { Item, ItemsList } from 'src/app/types/Item';
 import { StorageService } from 'src/app/services/storage-service.service';
 import { ListsService } from 'src/app/services/lists.service';
 
@@ -20,12 +20,12 @@ export class CreateListPage {
   savedLists: ItemsList[] = [];
 
   tableHeader: Array<any> = [
-    { title: 'No.', size: '1' },
-    { title: 'Name', size: '3' },
-    { title: 'Qty', size: '2' },
-    { title: 'Type', size: '2' },
-    { title: 'Price', size: '2' },
-    { title: '', size: '1' },
+    { title: 'No.', size: '1', class: 'table-header' },
+    { title: 'Name', size: '4', class: 'table-header' },
+    { title: 'Qty', size: '1', class: 'table-header' },
+    { title: 'Type', size: '2', class: 'table-header' },
+    { title: 'Price', size: '2', class: 'table-header' },
+    { title: '', size: '1', class: 'table-header' },
   ];
 
   constructor(
@@ -65,7 +65,9 @@ export class CreateListPage {
   async ionViewDidEnter() {
     await this.storageService.get('tempList')?.then(data => {
       data ? this.tempList = data : null;
-      this.patchFormValues(this.tempList);
+      if (this.itemsListForm?.value.items == 0){  // prevents duplicating items list
+        this.patchFormValues(this.tempList);
+      }
     });
   }
 
@@ -82,7 +84,7 @@ export class CreateListPage {
       category: [null],
       note: [null],
       checked: [false],
-      price: [0],
+      price: [],
     });
 
     this.items?.push(itemDetailsForm);
@@ -124,11 +126,11 @@ export class CreateListPage {
       date: data?.date,
       total: data?.total,
     });
-    this.patchFormArrays(data);
+    data ? this.patchFormArrays(data.items) : null;
   }
 
-  patchFormArrays(data: ItemsList | null) {
-    data?.items?.map((item) => {
+  patchFormArrays(data: Item[]) {
+    data?.map((item) => {
       let temp = this.fb.group({
         name: [item?.name],
         brand: [item?.brand],
