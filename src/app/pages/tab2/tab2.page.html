@@ -11,7 +11,7 @@
 <ion-content>
   <ng-container *ngIf="lists?.length">
     <ion-grid>
-      <ion-row *ngFor="let list of lists; let i = index" size="12" routerLink="/tabs/lists/view-list/{{list._id}}" class="ion-margin">
+      <ion-row *ngFor="let list of lists; let i = index" size="12" routerLink="/tabs/lists/edit-list/{{list._id}}" class="ion-margin">
         <ion-col>
           <app-list-card [itemsList]="list"></app-list-card>
         </ion-col>

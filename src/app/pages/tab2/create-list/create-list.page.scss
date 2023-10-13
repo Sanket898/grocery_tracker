@@ -11,6 +11,15 @@
   color: #1f2b2e;
 }
 
+@mixin table-header {
+  @include text-style();
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 3px;
+}
+
 .header-toolbar {
   --background: #ff4317;
 }
@@ -36,13 +45,13 @@ ion-input {
   @include text-style;
   border: 1px solid #dddddd;
   border-radius: 6px;
+  --padding-start: 10px;
+  word-wrap: break-word;
 }
 
-ion-textarea {
-  @include text-style;
-  border: 1px solid #dddddd;
-  border-radius: 6px;
-  padding: 0px 12px;
+ion-input.no-padding-input {
+  --padding-start: 0;
+  text-align: center;
 }
 
 ion-select {
@@ -81,21 +90,21 @@ ion-title {
   padding: 0px;
 }
 
-.act-col {
-  @include text-style;
-  font-size: large;
-  display: flex;
-  align-items: center;
-}
-
 .add-row-text {
   @include text-style;
   font-size: 15px;
   color: #ff4317;
 }
 
-.save-btn {
-  position: fixed;
-  bottom: 0px;
-  left: 5rem;
+.table-header {
+  @include table-header();
+}
+
+.table-rows {
+  @include text-style();
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 3px;
 }

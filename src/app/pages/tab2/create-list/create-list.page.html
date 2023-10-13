@@ -13,56 +13,42 @@
 
 <ion-content>
   <ion-grid>
-    <ion-row>
-      <ion-col>
-        <form [formGroup]="itemsListForm">
-          <ion-grid>
-            <ion-row>
-              <ion-label class="ion-no-padding">Title</ion-label>
-              <ion-input formControlName="title" type="text" placeholder="Ente title" class="ion-margin-bottom"></ion-input>
-            </ion-row>
-
-            <ng-container formArrayName="items">
-              <ion-row *ngFor="let item of items.controls; let i = index" [formGroupName]="i">
-                <ion-col size="1" class="act-col">{{ i + 1}}</ion-col>
-                <ion-col size="10">
-                <ion-row>
-                  <ion-col>
-                    <ion-input formControlName="name" type="text" placeholder="Enter name"></ion-input>
-                  </ion-col>
-                  <ion-col>
-                    <ion-input formControlName="brand" type="text" placeholder="Brand name"></ion-input>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col>
-                    <ion-input formControlName="quantity" type="number" placeholder="Quantity"></ion-input>
-                  </ion-col>
-                  <ion-col>
-                    <ion-select formControlName="type" placeholder="Select type">
-                      <ion-select-option value="kg">Kg</ion-select-option>
-                      <ion-select-option value="lt">Litre</ion-select-option>
-                      <ion-select-option value="pc">Pieces</ion-select-option>
-                    </ion-select>
-                  </ion-col>
-                </ion-row>
-              </ion-col>
-              <ion-col size="1" class="act-col">
-                <ion-icon name="trash-outline" color="danger" size="default" (click)="removeItem(i)"></ion-icon>
-              </ion-col>
-              </ion-row>
-            </ng-container>
-
-            <ion-row class="ion-justify-content-center add-row-text">
-              <ion-col size="4" (click)="addItem()" class="ion-text-center">
-                Add Item
-                <ion-icon name="add-circle-outline"></ion-icon>
-              </ion-col>
-            </ion-row>
-          </ion-grid>
-        </form>
-      </ion-col>
-    </ion-row>
+    <form [formGroup]="itemsListForm">
+      <ion-row style="height: 35px;" class="table-header-row">
+        <ion-col [class]="header.class" *ngFor="let header of tableHeader" [size]="header.size">{{header.title}}</ion-col>
+      </ion-row>
+      <br>
+      <ng-container formArrayName="items">
+      <ion-row *ngFor="let item of items.controls; let i = index" [formGroupName]="i" class="ion-margin-bottom">
+        <ion-col class="table-rows" size="">{{i + 1}}</ion-col>
+        <ion-col class="table-rows" size="4">
+          <ion-input formControlName="name" type="text" placeholder="Enter name"></ion-input>
+        </ion-col>
+        <ion-col class="table-rows" size="1">
+           <ion-input formControlName="quantity" type="number" maxlength="2"></ion-input>
+        </ion-col>
+        <ion-col class="table-rows" size="2">
+          <ion-select formControlName="type">
+            <ion-select-option value="kg">Kg</ion-select-option>
+            <ion-select-option value="lt">Lt</ion-select-option>
+            <ion-select-option value="pc">Pc</ion-select-option>
+          </ion-select>
+        </ion-col>
+        <ion-col class="table-rows" size="2">
+           <ion-input formControlName="price" type="number" class="ion-text-center" class="no-padding-input" style="font-weight: 600;"></ion-input>
+        </ion-col>
+        <ion-col class="table-rows" size="1">
+          <ion-icon name="trash-outline" color="danger" size="default" (click)="removeItem(i)"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ng-container>
+      <ion-row class="ion-justify-content-center add-row-text">
+        <ion-col size="4" (click)="addItem()" class="ion-text-center">
+          Add Item
+          <ion-icon name="add-circle-outline"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </form>
   </ion-grid>
 </ion-content>
 
@@ -72,6 +58,7 @@
       <ion-row>
         <ion-col style="display: flex;" class="ion-align-items-center">
           <h6 class="ion-no-margin">Total Items: {{tempList?.items?.length}}</h6>
+          <h6 class="ion-no-margin" *ngIf="false">Total:  </h6>
         </ion-col>
         <ion-col class="ion-text-end">
           <ion-button color="success" (click)="saveItemsList()" routerLink='/tabs/lists'>Save</ion-button>
