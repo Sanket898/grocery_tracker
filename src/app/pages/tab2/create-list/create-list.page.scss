@@ -36,6 +36,12 @@ ion-input {
   @include text-style;
   border: 1px solid #dddddd;
   border-radius: 6px;
+  --padding-start: 10px;
+}
+
+ion-input.no-padding-input {
+  --padding-start: 0;
+  text-align: center;
 }
 
 ion-textarea {
@@ -98,4 +104,26 @@ ion-title {
   position: fixed;
   bottom: 0px;
   left: 5rem;
+}
+
+.table-header {
+  @include text-style();
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 3px;
+}
+
+.table-rows {
+  @include text-style();
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 3px;
+}
+
+.price-input {
+  font-weight: 600;
 }

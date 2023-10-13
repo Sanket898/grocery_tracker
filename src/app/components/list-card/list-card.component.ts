@@ -2,6 +2,7 @@ import { StorageService } from 'src/app/services/storage-service.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ItemsList } from 'src/app/types/Item';
+import { ListsService } from 'src/app/services/lists.service';
 
 @Component({
   selector: 'app-list-card',
@@ -10,7 +11,7 @@ import { ItemsList } from 'src/app/types/Item';
 })
 export class ListCardComponent implements OnInit {
 
-  constructor(public router: Router, private storageService: StorageService) { }
+  constructor(public router: Router, private storageService: StorageService, private listsService: ListsService) { }
 
   @Input('itemsList') list!: ItemsList;
 
@@ -45,6 +46,7 @@ export class ListCardComponent implements OnInit {
     event?.stopPropagation();
 
     this.isListStarred(itemsList, true);
+    this.listsService.addToStarredList(itemsList);
   }
 
   async removeFromStarredList(event: Event, itemsList: ItemsList) {

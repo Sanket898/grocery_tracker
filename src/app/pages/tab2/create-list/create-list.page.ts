@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { ItemsList } from 'src/app/types/Item';
 import { StorageService } from 'src/app/services/storage-service.service';
 import { ListsService } from 'src/app/services/lists.service';
-import { Observable, map } from 'rxjs';
 
 @Component({
   selector: 'app-create-list',
@@ -20,9 +19,17 @@ export class CreateListPage {
   tempList!: ItemsList | null;
   savedLists: ItemsList[] = [];
 
+  tableHeader: Array<any> = [
+    { title: 'No.', size: '1' },
+    { title: 'Name', size: '3' },
+    { title: 'Qty', size: '2' },
+    { title: 'Type', size: '2' },
+    { title: 'Price', size: '2' },
+    { title: '', size: '1' },
+  ];
+
   constructor(
     private fb: FormBuilder,
-    private router: Router,
     private storageService: StorageService,
     private listsService: ListsService,
     private activatedRoute: ActivatedRoute,
@@ -38,7 +45,7 @@ export class CreateListPage {
       items: this.fb.array([]),
       total: [0],
     });
-  }
+  };
 
   async ionViewWillEnter() {
     await this.storageService.get('lists')?.then(data => {
@@ -75,6 +82,7 @@ export class CreateListPage {
       category: [null],
       note: [null],
       checked: [false],
+      price: [0],
     });
 
     this.items?.push(itemDetailsForm);
@@ -129,6 +137,7 @@ export class CreateListPage {
         category: [item?.category],
         note: [item?.note],
         checked: [item?.checked],
+        price: [item?.price],
       });
       this.items?.push(temp);
     });

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ListsService } from 'src/app/services/lists.service';
 import { StorageService } from 'src/app/services/storage-service.service';
 import { ItemsList } from 'src/app/types/Item';
 
@@ -11,9 +12,11 @@ export class Tab1Page {
 
   starredList: Array<ItemsList> = [];
 
-  constructor(private storageService: StorageService) { }
+  constructor(private storageService: StorageService, private listsService: ListsService) { }
 
   async ionViewWillEnter() {
+    this.starredList = this.listsService.starredList;
+
     await this.storageService.get('lists')?.then((data: ItemsList[]) => {
       data.map(list => {
         if (list.isStarred && !this.isPresent(list)) {
@@ -21,6 +24,7 @@ export class Tab1Page {
         }
       })
     });
+    console.log(this.starredList)
   }
 
   isPresent(itemList: ItemsList) {
