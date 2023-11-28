@@ -1,0 +1,110 @@
+@mixin header-col {
+  box-sizing: border-box;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+}
+
+@mixin text-style {
+  font-size: 13px;
+  font-weight: 400;
+  color: #1f2b2e;
+}
+
+@mixin table-header {
+  @include text-style();
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 3px;
+}
+
+.header-toolbar {
+  --background: #ff4317;
+}
+
+.header-col-1 {
+  @include header-col;
+  justify-content: center;
+}
+
+.header-col-2 {
+  @include header-col;
+  padding-bottom: 13px;
+  justify-content: flex-start;
+}
+
+ion-label {
+  @include text-style;
+  width: 100%;
+  padding: 0px 12px;
+}
+
+ion-input {
+  @include text-style;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  --padding-start: 10px;
+  word-wrap: break-word;
+}
+
+ion-input.no-padding-input {
+  --padding-start: 0;
+  text-align: center;
+}
+
+ion-select {
+  min-height: 35px;
+  padding: 0px 12px;
+  border: 1px solid #dddddd;
+  border-radius: 6px;
+  --placeholder-color: #1f2b2e;
+}
+
+ion-select::part(placeholder) {
+  @include text-style;
+}
+
+ion-select::part(container) {
+  @include text-style;
+  width: 100%;
+}
+
+ion-select::part(icon) {
+  font-size: 12px;
+  font-weight: 400;
+}
+
+ion-button {
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  --background: #ff4317;
+}
+
+ion-title {
+  color: #1f2b2e;
+  font-size: 1.5rem;
+  font-weight: 600;
+  padding: 0px;
+}
+
+.add-row-text {
+  @include text-style;
+  font-size: 15px;
+  color: #ff4317;
+}
+
+.table-header {
+  @include table-header();
+}
+
+.table-rows {
+  @include text-style();
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0px 3px;
+}

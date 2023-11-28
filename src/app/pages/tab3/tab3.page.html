@@ -1,16 +1,45 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+    <ion-title> Tab 3 </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+  <ion-grid class="ion-margin-top">
+    <form [formGroup]="findTargetForm">
+      <ion-row class="ion-justify-content-center ion-margin-bottom">
+        <ion-col size="6">
+          <ion-input formControlName="buyPrice" label="Buy :" type="number"> </ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center ion-margin-bottom">
+        <ion-col size="6">
+          <ion-input formControlName="sellPrice" label="Sell :" type="number"> </ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center ion-margin-bottom">
+        <ion-col size="6">
+          <ion-input formControlName="stopLossPrice" label="Stop Loss :" type="number">
+          </ion-input>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-justify-content-center ion-margin-bottom">
+        <ion-col size="6">
+          <ion-input formControlName="targetPrice" label="Target :" type="number" readonly="true">
+          </ion-input>
+        </ion-col>
+      </ion-row>
+    </form>
+    <ion-row class="ion-justify-content-center ion-margin-bottom">
+      <on-col>
+        <ion-button (click)="getResult()">Find</ion-button>
+      </on-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-item>
+        Return:
+        <ion-text>{{findTargetForm.value.return | number : '1.2-2'}}</ion-text>
+      </ion-item>
+    </ion-row>
+  </ion-grid>
 </ion-content>
